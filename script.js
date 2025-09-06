@@ -97,3 +97,105 @@ let logos = document.querySelectorAll('.logo-container img');
       revealOnScroll(title, "show");
       revealOnScroll(cards, "show");
     });
+
+     // --- Fade in/out on scroll (robust) ---
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        if (entry.isIntersecting) {
+          el.classList.add('in-view');
+          el.classList.remove('out-view');
+        } else {
+          el.classList.remove('in-view');
+          el.classList.add('out-view');
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0,              // trigger as soon as it touches viewport
+      rootMargin: "0px 0px -10% 0px" // start a bit earlier
+    });
+
+    const title = document.getElementById('studioTitle');
+    const images = document.querySelectorAll('.studio-image');
+    io.observe(title);
+    images.forEach(img => io.observe(img));
+
+    // Ensure visible on first paint (in case some browsers delay IO callback)
+    window.addEventListener('load', () => {
+      [title, ...images].forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) el.classList.add('in-view');
+      });
+    });
+
+    // --- Parallax (relative to the container) ---
+    const container = document.getElementById('studio');
+
+    function parallax() {
+      const rect = container.getBoundingClientRect();
+      const scrolledPastTop = Math.min(Math.max(-rect.top, 0), rect.height + window.innerHeight);
+      images.forEach((img) => {
+        const speed = parseFloat(img.dataset.speed) || 3;
+        // Move up/down based on how far the container has scrolled through the viewport
+        img.style.transform = `translateY(${scrolledPastTop / speed}px)`;
+      });
+    }
+    // run on scroll + on load
+    window.addEventListener('scroll', parallax, { passive: true });
+    window.addEventListener('resize', parallax);
+    window.addEventListener('load', parallax);
+
+// Employee section
+     const employeeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.info-image, .info-text').forEach(el => employeeObserver.observe(el));
+
+
+    // Bussiness Section
+
+    const businessObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("business-card")) {
+            // add stagger delay for cards
+            const cards = document.querySelectorAll(".business-card");
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add("in-view");
+              }, index * 300); // 300ms delay each
+            });
+          } else {
+            entry.target.classList.add("in-view");
+          }
+        } else {
+          entry.target.classList.remove("in-view");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".business-text, .business-card").forEach(el => businessObserver.observe(el));
+
+ // Footer Section
+
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
