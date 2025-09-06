@@ -1,3 +1,14 @@
+ window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 50) { // change 50 to how much scroll you want
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+
+
 function initCarousel(slider, hasThumbs = false) {
   const slides = slider.querySelectorAll(".slide");
   const thumbs = hasThumbs ? slider.querySelectorAll(".thumbnails img") : [];

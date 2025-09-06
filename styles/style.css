@@ -5,15 +5,25 @@
 }
 
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     padding: 20px 40px;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
+    z-index: 1000;
+    background: transparent;   /* no background at first */
+    transition: background 0.3s ease, padding 0.3s ease;
 }
+
+.navbar.scrolled {
+    background: rgba(22, 22, 22, 0.8); /* background after scroll */
+    backdrop-filter: blur(6px);      /* optional glass effect */
+    padding: 15px 40px;              /* shrink a little on scroll */
+}
+
 
 .logo img {
     height: 80px;
