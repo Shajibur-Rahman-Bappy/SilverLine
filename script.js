@@ -1,4 +1,19 @@
- window.addEventListener("scroll", function () {
+async function loadPart(id, file) {
+  const el = document.getElementById(id);
+  if (el) {
+    const res = await fetch(file);
+    el.innerHTML = await res.text();
+  }
+}
+
+// Load header and footer
+loadPart("header", "header.html");
+loadPart("footer", "footer.html");
+
+
+
+
+window.addEventListener("scroll", function () {
     const navbar = document.querySelector(".navbar");
     if (window.scrollY > 50) { // change 50 to how much scroll you want
       navbar.classList.add("scrolled");
@@ -210,3 +225,55 @@ let logos = document.querySelectorAll('.logo-container img');
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+
+
+    // About us Page Section
+
+// Scroll Fade-in
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('animate');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Parallax Tilt Effect
+    const tiltElements = document.querySelectorAll('.tilt');
+    tiltElements.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 10; // max 10deg
+        const rotateY = ((x - centerX) / centerX) * 10;
+        el.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = "rotateX(0) rotateY(0) scale(1)";
+      });
+    });
+
+
+
+      document.querySelectorAll('.story-img').forEach(img => {
+    img.addEventListener('mousemove', (e) => {
+      const rect = img.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+    img.addEventListener('mouseleave', () => {
+      img.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+    });
+  });
