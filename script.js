@@ -277,3 +277,7 @@ let logos = document.querySelectorAll('.logo-container img');
       img.style.transform = 'rotateX(0) rotateY(0) scale(1)';
     });
   });
+
+
+
+
