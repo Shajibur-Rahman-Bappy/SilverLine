@@ -7,7 +7,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  background-color: darkslategrey
+  background-color: darkslategrey;
 }
 
 .navbar {
@@ -639,7 +639,7 @@ h2.hide {
 }
 
 
-/* Bussiness Section */
+/* Business Section */
 
 
 
@@ -1285,7 +1285,7 @@ footer .footer-right a:hover {
   transform: translateY(30px);
   transition: 
     opacity 0.6s ease var(--delay),
-    transform 0.6s ease var(--delay),
+    transform 0.6s ease var(--delay);
   cursor: pointer;
 }
 
