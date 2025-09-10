@@ -1465,3 +1465,172 @@ footer .footer-right a:hover {
   transform: translate(0, 0) !important;
 }
 
+
+
+/* sustainability and compliance */
+
+header {
+      background: linear-gradient(135deg, #00695c, #009688);
+      color: #fff;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    header p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    /* Intro Section */
+    .intro {
+      max-width: 900px;
+      margin: 3rem auto;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .intro h2 {
+      font-size: 2rem;
+      color: #e9ecec;
+      margin-bottom: 1rem;
+    }
+
+    .intro p {
+      font-size: 1rem;
+      color: #f5f4f4;
+    }
+
+    /* Cards Section */
+
+    /* Compliance Grid */
+section.compliance {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.compliance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 2rem;
+  align-items: stretch; /* ensures all cards in a row are equal height */
+}
+
+/* Base hidden state */
+.card2 {
+  background: #ccc8e0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  opacity: 0;                 /* hidden initially */
+  transform: translateY(40px); /* start position */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Visible state */
+/* Show on scroll */
+.card2.show {
+  opacity: 1;
+  transform: translateY(0);  /* moves to normal position */
+}
+
+    /* Hover effect */
+   /* Hover Animation */
+.card2.show:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Title */
+.card2 h2 {
+  font-size: 1.4rem;
+  color: #00695c;
+  margin-bottom: 1rem;
+}
+
+/* Animated underline */
+.card2 h2::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #009688;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.card2:hover h2::after {
+  width: 50px;
+}
+
+/* Paragraph */
+
+.card2 p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, #009688, #004d40);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem;
+      margin-top: 5rem;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .cta button {
+      padding: 0.8rem 2rem;
+      border: none;
+      background: #fff;
+      color: #00695c;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cta button:hover {
+      background: #e0f2f1;
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
