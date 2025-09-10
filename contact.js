@@ -12,7 +12,16 @@ loadPart("footer", "footer.html");
 
 
 
-  
+  // Navbar scroll background
+window.addEventListener("scroll", function () {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
   
   
   
@@ -20,14 +29,11 @@ loadPart("footer", "footer.html");
   
   // contact page 
 
-// Fade-in animation on scroll with staggered delay
 document.addEventListener("DOMContentLoaded", () => {
   const boxes = Array.from(document.querySelectorAll(".contact1-box"));
 
-  // assign index so we can use it for stagger order
   boxes.forEach((b, i) => b.dataset.index = i);
-
-  const STAGGER_MS = 150; // change this to speed up/slow down stagger
+  const STAGGER_MS = 150;
 
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries, observer) => {
@@ -35,23 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (entry.isIntersecting) {
           const el = entry.target;
           const idx = parseInt(el.dataset.index, 10) || 0;
-          // set CSS variable used by transition delay
           el.style.setProperty("--delay", `${idx * STAGGER_MS}ms`);
           el.classList.add("show");
-          // stop observing once shown
           observer.unobserve(el);
         }
       });
     }, {
       root: null,
-      rootMargin: "0px 0px -15% 0px", // trigger slightly before fully visible
+      rootMargin: "0px 0px -15% 0px",
       threshold: 0.15
     });
 
     boxes.forEach(b => io.observe(b));
   } else {
-    // Fallback: simple scroll listener + initial check
-    const triggerBottom = () => window.innerHeight * 0.85;
+    // Fallback
+    function triggerBottom() {
+      return window.innerHeight * 0.85;
+    }
 
     function checkBoxes() {
       boxes.forEach((box, idx) => {
@@ -66,6 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", checkBoxes, { passive: true });
     window.addEventListener("resize", checkBoxes);
-    checkBoxes(); // initial run
+    checkBoxes();
   }
 });
