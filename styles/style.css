@@ -199,6 +199,7 @@ body {
   background: transparent;
   padding: 20px 40px;
   border-radius: 10px;
+  font-weight: 700;
   color: #fff;
   opacity: 0;
 }
@@ -207,12 +208,13 @@ body {
 .slider-with-thumbs .text-content {
   position: absolute;
   top: 70%;
-  left: 45%;
+  left: 60%;
   font-size: 2rem;
+  font-weight: 700;
   background: transparent;
   padding: 15px 30px;
   border-radius: 10px;
-  color: #fff;
+  color: #0c0c0c;
   opacity: 0;
 }
 
@@ -331,7 +333,7 @@ body {
 
 .section-title {
   font-size: 26px;
-  color: white;
+  color: rgb(255, 255, 255);
   margin: 50px 0;
   opacity: 0;
   transform: translateY(40px) scale(0.95);
